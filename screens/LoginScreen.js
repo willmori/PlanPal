@@ -4,7 +4,8 @@ import logo from '../assets/favicon.png';
 import google from '../assets/google.png';
 import Colors from '../Colors.js';
 
-const LoginPage = () => {
+const LoginScreen = () => {
+
   return (
     <View style={styles.container}>
       <Image
@@ -35,7 +36,7 @@ const LoginPage = () => {
       {/* Implement the Google login button using a library like react-native-google-signin */}
       <TouchableOpacity
         style={styles.googleButton}
-        onPress={() => console.log('Login pressed')}
+        onPress={() => console.log('Google Login pressed')}
       >
         <Image
           source={google}
@@ -101,4 +102,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginPage;
+export default LoginScreen;
