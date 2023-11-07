@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   googleButton: {
     width: '60%',
-    backgroundColor: 'rgb(242,242,242)', 
+    backgroundColor: Colors.gray, 
     padding: 10,
     borderRadius: 35,
     flex: 1,

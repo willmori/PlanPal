@@ -2,10 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
+import AccountScreen from './screens/AccountScreen';
 
 export default function App() {
   return (
-    <LoginScreen />
+    <AccountScreen />
   );
 }
 
