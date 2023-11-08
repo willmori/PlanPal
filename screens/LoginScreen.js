@@ -4,7 +4,7 @@ import logo from '../assets/favicon.png';
 import google from '../assets/google.png';
 import Colors from '../Colors.js';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
@@ -31,7 +31,7 @@ const LoginScreen = () => {
       </TouchableOpacity>
       <Button
         title="Register"
-        onPress={() => console.log('Register pressed')}
+        onPress={() => navigation.navigate("Register")}
       />
       {/* Implement the Google login button using a library like react-native-google-signin */}
       <TouchableOpacity

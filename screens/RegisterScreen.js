@@ -9,13 +9,6 @@ const RegisterScreen = () => {
 
   return (
     <View style={styles.container}>
-        <TouchableOpacity
-            style={styles.arrow}
-            onPress={() => console.log('back to login pressed')}
-        >
-            <Image source={backArrow} style={styles.backArrow} />
-        </TouchableOpacity>
-
         <Image
             source={logo} 
             style={styles.logo}
@@ -79,17 +72,6 @@ const styles = StyleSheet.create({
     color: '#fff', 
     fontSize: 18,
   },
-  arrow: {
-    position: 'absolute',
-    top: 70,
-    left: 30,
-    height: 20,
-    width: 20,
-  },
-  backArrow: {
-    width: 40,
-    height: 40
-  }
 });
 
 export default RegisterScreen;
