@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, FlatList } from 'react-native';
+import Colors from '../Colors';
 import EventCard from '../components/EventCard';
 
 const eventsData = [
@@ -10,7 +11,7 @@ const eventsData = [
 export default function MyEventsScreen({ navigation }) {
   
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
         <FlatList
           data={eventsData}
           keyExtractor={item => item.id}
@@ -18,14 +19,13 @@ export default function MyEventsScreen({ navigation }) {
             <EventCard name={item.name} date={item.date} time={item.time} address={item.address} onPress={() => navigation.navigate("EventDetail", item)} />
           )}
         />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingTop: 20
+    backgroundColor: Colors.background
   },
 });

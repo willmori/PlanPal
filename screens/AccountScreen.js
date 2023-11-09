@@ -7,10 +7,10 @@ import Colors from '../Colors.js';
 import Avatar from '../components/Avatar';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation }) => {
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor: Colors.background, flex: 1}}>
         <View style={[styles.item, {marginBottom: 60}]}>
             <Avatar blob={photo} />
             <View style={styles.profileInfo}>
@@ -19,13 +19,13 @@ const AccountScreen = () => {
             </View>
         </View>
 
-        <TouchableOpacity style={styles.item} onPress={() => console.log('Edit Profile pressed')}>
+        <TouchableOpacity style={styles.item} onPress={() => navigation.navigate("EditProfile")}>
             <FontAwesome5 name="cog" size={27} color="gray" />
             <View style={styles.profileInfo}>
                 <Text style={styles.name}>Edit Profile</Text>
             </View>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.item, {borderTopWidth: 0}]} onPress={() => console.log('Notifications pressed')}>
+        <TouchableOpacity style={[styles.item, {borderTopWidth: 0}]} onPress={() => navigation.navigate("NotificationSettings")}>
             <FontAwesome5 name="bell" size={30} color="gray" />
             <View style={styles.profileInfo}>
                 <Text style={styles.name}>Notifications</Text>
@@ -53,7 +53,8 @@ const styles = StyleSheet.create({
     borderBottomColor: 'lightgray',
     paddingTop: 15,
     paddingBottom: 15,
-    paddingLeft: 20
+    paddingLeft: 20,
+    backgroundColor: "#fff"
   },
   profileInfo: {
     flexDirection: 'column',
