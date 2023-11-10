@@ -1,41 +1,74 @@
-import React from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, Image, Button, SafeAreaView, StatusBar } from 'react-native';
+import React, { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { StyleSheet, View, TextInput, TouchableOpacity, Text, Image, Button, SafeAreaView, StatusBar, KeyboardAvoidingView } from 'react-native';
 import logo from '../assets/favicon.png';
 import google from '../assets/google.png';
 import backArrow from '../assets/left-arrow.png';
 import Colors from '../Colors.js';
+import { FIREBASE_AUTH } from '../FirebaseConfig';
 
 const RegisterScreen = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const auth = FIREBASE_AUTH;
+  
+  const register = async () => {
+    if (password.length < 6) {
+      alert('Password must be 6 characters or greater')
+    } else if (password !== confirmPassword) {
+      alert('Passwords do not match')
+    } else {
+      try {
+        const response = await createUserWithEmailAndPassword(auth, email, password);
+        alert('Account created')
+      } catch (error) {
+        alert('Account creation failed')
+        console.log(error);
+      }
+    }
+  }
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={150} style={styles.container}>
+      
         <Image
             source={logo} 
             style={styles.logo}
         />
-        <TextInput
-            placeholder="Email"
-            style={styles.input}
-            keyboardType="email-address"
-            autoCapitalize="none"
-        />
-        <TextInput
-            placeholder="Password"
-            secureTextEntry
-            style={styles.input}
-        />
-        <TextInput
-            placeholder="Confirm Password"
-            secureTextEntry
-            style={styles.input}
-        />
-        <TouchableOpacity
-            style={styles.button}
-            onPress={() => console.log('Sign up pressed')}
-        >
-            <Text style={styles.buttonText}>Sign up</Text>
-        </TouchableOpacity>
-    </View>
+        
+          <TextInput
+              value={email}
+              placeholder="Email"
+              style={styles.input}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              onChangeText={(text) => setEmail(text)}
+          />
+          <TextInput
+              value={password}
+              placeholder="Password"
+              secureTextEntry
+              style={styles.input}
+              onChangeText={(text) => setPassword(text)}
+          />
+          <TextInput
+              value={confirmPassword}
+              placeholder="Confirm Password"
+              secureTextEntry
+              style={styles.input}
+              onChangeText={(text) => setConfirmPassword(text)}
+          />
+          
+          <TouchableOpacity
+              style={styles.button}
+              onPress={register}
+          >
+              <Text style={styles.buttonText}>Sign up</Text>
+          </TouchableOpacity>
+        
+    </KeyboardAvoidingView>
   );
 };
 

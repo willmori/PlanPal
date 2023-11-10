@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, FlatList } from 'react-native';
 import Colors from '../Colors';
 import EventCard from '../components/EventCard';
@@ -9,6 +9,16 @@ const eventsData = [
 ];
 
 export default function MyEventsScreen({ navigation }) {
+
+  const [testData, setTestData] = React.useState();
+
+  React.useEffect(() => {
+    fetch("http://localhost:5000/api/events")
+      .then(response => response.json())
+      .then(data => {setTestData(data); console.log(data)})
+      .catch(error => console.log(error))
+  }, [])
+
   
   return (
     <SafeAreaView style={styles.container}>
