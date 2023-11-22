@@ -6,30 +6,20 @@ import { Searchbar } from 'react-native-paper';
 import { Image } from 'react-native';
 
 
-const eventsData = [
-  { id: '1', name: 'Community Meetup', date: 'January 1, 2023', time: '10:00 AM', address: '123 Main St, Anytown' },
-  { id: '2', name: 'Tech Conference', date: 'February 12, 2023', time: '9:00 AM', address: '456 Tech Rd, Innova City' },
-  { id: '3', name: 'Tech Conference', date: 'February 12, 2023', time: '9:00 AM', address: '456 Tech Rd, Innova City' },
-  { id: '4', name: 'Tech Conference', date: 'February 12, 2023', time: '9:00 AM', address: '456 Tech Rd, Innova City' },
-  { id: '5', name: 'Tech Conference', date: 'February 12, 2023', time: '9:00 AM', address: '456 Tech Rd, Innova City' },
-  { id: '6', name: 'Tech Conference', date: 'February 12, 2023', time: '9:00 AM', address: '456 Tech Rd, Innova City' },
-];
-
 export default function MyEventsScreen({ navigation }) {
-
-  /*
-  const [testData, setTestData] = React.useState();
+  const [eventsData, setEventsData] = React.useState([]);
 
   React.useEffect(() => {
     fetch("http://localhost:5000/api/events")
       .then(response => response.json())
-      .then(data => {setTestData(data); console.log(data)})
+      .then(data => setEventsData(data))
       .catch(error => console.log(error))
   }, [])
-  */
-
+  
   const [searchQuery, setSearchQuery] = React.useState('');
-  const onChangeSearch = query => setSearchQuery(query);
+  const onChangeSearch = () => {
+    console.log(eventsData)
+  }
   
   return (
     <SafeAreaView style={styles.container}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { FontAwesome5 } from '@expo/vector-icons';
 import Colors from '../Colors';
 
 const EventCard = ({ name, date, time, address, onPress }) => {
@@ -8,8 +9,17 @@ const EventCard = ({ name, date, time, address, onPress }) => {
     <TouchableWithoutFeedback onPress={onPress}>
         <View style={styles.card}>
             <Text style={styles.name}>{name}</Text>
-            <Text style={styles.date}>{date}</Text>
-            <Text style={styles.time}>{time}</Text>
+            <View style={styles.info}>
+              <View>
+                <Text style={styles.date}>{date}</Text>
+                <Text style={styles.time}>{time}</Text>
+              </View>
+              <View style={styles.icon}>
+                <FontAwesome5 name={'car'} solid size={28} color={Colors.contrast} />
+                <Text style={styles.travelTime}>1h 20m</Text>
+              </View>
+              
+            </View>
             <Text style={styles.address}>{address}</Text>
         </View>
     </TouchableWithoutFeedback>
@@ -33,7 +43,8 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 4,
+    color: Colors.gray,
+    marginBottom: 20
   },
   date: {
     fontSize: 14,
@@ -41,12 +52,28 @@ const styles = StyleSheet.create({
   },
   time: {
     fontSize: 14,
-    marginBottom: 2,
   },
   address: {
     fontSize: 14,
-    color: '#666',
+    color: Colors.gray,
   },
+  info: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20
+  },
+  icon: {
+    position: 'absolute',
+    left: 250,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  travelTime: {
+    marginTop: 2
+  }
 });
 
 export default EventCard;

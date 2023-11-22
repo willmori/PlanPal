@@ -13,7 +13,6 @@ import Colors from "../Colors";
 
 const Tab = createBottomTabNavigator();
 
-
 const AppNavigator = () => (
     <Tab.Navigator
         tabBarOptions={{
