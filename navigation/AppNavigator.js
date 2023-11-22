@@ -9,12 +9,23 @@ import AccountScreen from "../screens/AccountScreen";
 import EventsNavigator from "./EventsNavigator";
 import AccountNavigator from "./AccountNavigator";
 import NewEventButton from "./NewEventButton";
+import Colors from "../Colors";
 
 const Tab = createBottomTabNavigator();
 
 
 const AppNavigator = () => (
-    <Tab.Navigator>
+    <Tab.Navigator
+        tabBarOptions={{
+            activeTintColor: Colors.contrast,
+            inactiveTintColor: 'lightgray',
+            activeBackgroundColor: Colors.secondary,
+            inactiveBackgroundColor: Colors.secondary,
+            style: {
+                  backgroundColor: Colors.secondary,
+            }
+        }}
+    >
         <Tab.Screen
             name="Events"
             component={EventsNavigator}

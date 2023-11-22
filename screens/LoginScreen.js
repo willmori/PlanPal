@@ -1,26 +1,44 @@
-import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, Image, Button, SafeAreaView, KeyboardAvoidingView } from 'react-native';
 import logo from '../assets/favicon.png';
 import google from '../assets/google.png';
 import Colors from '../Colors.js';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
+import * as Google from "expo-auth-session/providers/google";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithCredential, getAuth, signInWithRedirect } from 'firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { makeRedirectUri } from 'expo-auth-session';
+
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const auth = FIREBASE_AUTH;
 
   const login = async () => {
     try {
-      const response = await signInWithEmailAndPassword(auth, email, password);
+      const response = await signInWithEmailAndPassword(FIREBASE_AUTH, email, password);
       alert('Login successful')
     } catch (error) {
       console.log(error);
       alert('Invalid email or password')
     }
   }
+
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    iosClientId: '493837676775-q38mm877i6rn5kcbh9i8nqul1ommll0j.apps.googleusercontent.com'
+  })
+
+  useEffect(() => {
+    if (response?.type === "success") {
+      const { id_token } = response.params;
+      const credential = GoogleAuthProvider.credential(id_token);
+      signInWithCredential(FIREBASE_AUTH, credential);
+    }
+  }, [response])
+
+  
+  
 
   return (
     <KeyboardAvoidingView behavior='padding' style={styles.container}>
@@ -57,7 +75,7 @@ const LoginScreen = ({ navigation }) => {
       {/* Implement the Google login button using a library like react-native-google-signin */}
       <TouchableOpacity
         style={styles.googleButton}
-        onPress={() => console.log('Google Login pressed')}
+        onPress={() => promptAsync()}
       >
         <Image
           source={google}

@@ -24,7 +24,7 @@ const RegisterScreen = () => {
         const response = await createUserWithEmailAndPassword(auth, email, password);
         alert('Account created')
       } catch (error) {
-        alert('Account creation failed')
+        alert(error)
         console.log(error);
       }
     }

@@ -6,6 +6,7 @@ import photo from '../assets/suit_photo.jpg';
 import Colors from '../Colors.js';
 import Avatar from '../components/Avatar';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { FIREBASE_AUTH } from '../FirebaseConfig';
 
 const AccountScreen = ({ navigation }) => {
 
@@ -32,7 +33,7 @@ const AccountScreen = ({ navigation }) => {
             </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.item, {marginTop: 50}]} onPress={() => console.log('Logout pressed')}>
+        <TouchableOpacity style={[styles.item, {marginTop: 50}]} onPress={() => FIREBASE_AUTH.signOut()}>
             <FontAwesome5 name="sign-out-alt" size={30} color="black" />
             <View style={styles.profileInfo}>
                 <Text style={[styles.name, {color: 'red'}]}>Logout</Text>

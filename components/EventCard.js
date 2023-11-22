@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import Colors from '../Colors';
 
 const EventCard = ({ name, date, time, address, onPress }) => {
   return (
@@ -17,8 +18,8 @@ const EventCard = ({ name, date, time, address, onPress }) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
-    borderRadius: 8,
+    backgroundColor: Colors.secondary,
+    borderRadius: 22,
     padding: 16,
     elevation: 3,
     shadowOffset: { width: 1, height: 1 },

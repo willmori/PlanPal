@@ -7,7 +7,7 @@ function NewEventButton({ onPress }) {
     return (
         <TouchableOpacity onPress={onPress}>
             <View style={styles.container}>
-                <FontAwesome5 name="plus-circle" color={'white'} size={40} /> 
+                <FontAwesome5 name="plus-circle" color={Colors.secondary} size={40} /> 
             </View>
         </TouchableOpacity>
         
@@ -16,12 +16,12 @@ function NewEventButton({ onPress }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: Colors.primary,
+        backgroundColor: Colors.contrast,
         height: 80,
         width: 80,
         borderRadius: 40,
         bottom: 25,
-        borderColor: 'white',
+        borderColor: Colors.secondary,
         borderWidth: 8,
         alignItems: 'center',
         justifyContent: 'center'

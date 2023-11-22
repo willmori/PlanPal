@@ -9,16 +9,20 @@ import { NavigationContainer } from '@react-navigation/native';
 import AuthNavigator from './navigation/AuthNavigator';
 import AppNavigator from './navigation/AppNavigator';
 import navigationTheme from './navigation/navigationTheme';
-import { onAuthStateChanged } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
+import * as WebBrowser from 'expo-web-browser';
+import { onAuthStateChanged } from 'firebase/auth';
+
+WebBrowser.maybeCompleteAuthSession();
 
 export default function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    onAuthStateChanged(FIREBASE_AUTH, (user) => {
+    const unsub = onAuthStateChanged(FIREBASE_AUTH, (user) => {
       setUser(user);
-    })
+    });
+    return () => unsub();
   }, [])
 
   return (
