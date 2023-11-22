@@ -18,7 +18,7 @@ export default function MyEventsScreen({ navigation }) {
   
   const [searchQuery, setSearchQuery] = React.useState('');
   const onChangeSearch = () => {
-   
+   console.log(eventsData)
   }
   
   return (
