@@ -20,8 +20,11 @@ const AppNavigator = () => (
             inactiveTintColor: 'lightgray',
             activeBackgroundColor: Colors.secondary,
             inactiveBackgroundColor: Colors.secondary,
+            
             style: {
-                  backgroundColor: Colors.secondary,
+                backgroundColor: Colors.secondary,
+                borderTopWidth: 0,
+                shadowOpacity: 0,
             }
         }}
     >
@@ -33,8 +36,7 @@ const AppNavigator = () => (
             name="NewEvent"
             component={NewEventScreen} 
             options={({ navigation }) => ({
-                tabBarButton: () => (<NewEventButton onPress={() => navigation.navigate("NewEvent")} />),
-                tabBarIcon: ({ color, size }) => <FontAwesome5 name="plus-circle" color={color} size={size} /> 
+                tabBarButton: () => (<NewEventButton onPress={() => navigation.navigate("NewEvent")} />)
             })} />
         <Tab.Screen
             name="Account"

@@ -5,8 +5,8 @@ export default {
     ...DefaultTheme,
     colors: {
         ...DefaultTheme.colors,
-        primary: Colors.primary,
-        background: "white"
+        primary: Colors.contrast,
+        background: Colors.background
     }
 };
 

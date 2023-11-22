@@ -41,6 +41,7 @@ const RegisterScreen = () => {
           <TextInput
               value={email}
               placeholder="Email"
+              placeholderTextColor={Colors.contrast}
               style={styles.input}
               keyboardType="email-address"
               autoCapitalize="none"
@@ -49,6 +50,7 @@ const RegisterScreen = () => {
           <TextInput
               value={password}
               placeholder="Password"
+              placeholderTextColor={Colors.contrast}
               secureTextEntry
               style={styles.input}
               onChangeText={(text) => setPassword(text)}
@@ -56,6 +58,7 @@ const RegisterScreen = () => {
           <TextInput
               value={confirmPassword}
               placeholder="Confirm Password"
+              placeholderTextColor={Colors.contrast}
               secureTextEntry
               style={styles.input}
               onChangeText={(text) => setConfirmPassword(text)}
@@ -89,12 +92,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderWidth: 1,
     borderColor: '#ddd',
+    color: Colors.contrast,
     padding: 18,
     borderRadius: 20,
   },
   button: {
     width: '100%',
-    backgroundColor: Colors.primary, 
+    backgroundColor: Colors.secondary, 
     padding: 15,
     borderRadius: 25,
     alignItems: 'center',
@@ -102,7 +106,7 @@ const styles = StyleSheet.create({
     marginTop: 35
   },
   buttonText: {
-    color: '#fff', 
+    color: Colors.contrast, 
     fontSize: 18,
   },
 });

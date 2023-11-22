@@ -20,11 +20,15 @@ const styles = StyleSheet.create({
         height: 80,
         width: 80,
         borderRadius: 40,
-        bottom: 25,
+        bottom: 20,
         borderColor: Colors.secondary,
         borderWidth: 8,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        shadowOpacity: 0,
+        shadowOffset: 0,
+        shadowRadius: 0,
+        shadowColor: 0
     }
 });
 

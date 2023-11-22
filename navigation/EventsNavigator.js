@@ -7,7 +7,16 @@ import Colors from '../Colors';
 const Stack = createStackNavigator();
 
 const EventsNavigator = () => (
-    <Stack.Navigator>
+    <Stack.Navigator
+        screenOptions={{
+            headerStyle: {
+                backgroundColor: Colors.background, 
+                borderBottomWidth: 0,
+                shadowOpacity: 0,
+            },
+            headerTintColor: Colors.contrast, 
+        }}
+    >
         <Stack.Screen 
             name="MyEvents" 
             component={MyEventsScreen} 

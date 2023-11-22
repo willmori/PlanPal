@@ -49,6 +49,7 @@ const LoginScreen = ({ navigation }) => {
       <TextInput
         value={email}
         placeholder="Email"
+        placeholderTextColor={Colors.contrast}
         style={styles.input}
         keyboardType="email-address"
         autoCapitalize="none"
@@ -57,6 +58,7 @@ const LoginScreen = ({ navigation }) => {
       <TextInput
         value={password}
         placeholder="Password"
+        placeholderTextColor={Colors.contrast}
         secureTextEntry
         autoCapitalize='none'
         style={styles.input}
@@ -69,6 +71,7 @@ const LoginScreen = ({ navigation }) => {
         <Text style={styles.buttonText}>Log in</Text>
       </TouchableOpacity>
       <Button
+        color={Colors.contrast}
         title="Register"
         onPress={() => navigation.navigate("Register")}
       />
@@ -104,12 +107,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderWidth: 1,
     borderColor: '#ddd',
+    color: Colors.contrast,
     padding: 18,
     borderRadius: 20,
   },
   button: {
     width: '100%',
-    backgroundColor: Colors.primary, 
+    backgroundColor: Colors.secondary, 
     padding: 15,
     borderRadius: 25,
     alignItems: 'center',
@@ -117,12 +121,12 @@ const styles = StyleSheet.create({
     marginTop: 35
   },
   buttonText: {
-    color: '#fff', 
+    color: Colors.contrast, 
     fontSize: 18,
   },
   googleButton: {
-    width: '60%',
-    backgroundColor: Colors.gray, 
+    width: '62%',
+    backgroundColor: Colors.secondary, 
     padding: 10,
     borderRadius: 35,
     flex: 1,
@@ -132,13 +136,13 @@ const styles = StyleSheet.create({
     bottom: 35
   },
   googleButtonText: {
-    color: 'black', 
+    color: "lightgray", 
     fontSize: 18,
   },
   google: {
     height: 40,
     width: 40
-  }
+  },
 });
 
 export default LoginScreen;

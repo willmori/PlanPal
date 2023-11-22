@@ -8,7 +8,16 @@ import Colors from '../Colors';
 const Stack = createStackNavigator();
 
 const AccountNavigator = () => (
-    <Stack.Navigator>
+    <Stack.Navigator
+        screenOptions={{
+            headerStyle: {
+                backgroundColor: Colors.background,
+                borderBottomWidth: 0,
+                shadowOpacity: 0,
+            },
+            headerTintColor: Colors.contrast, 
+        }}
+    >
         <Stack.Screen name="Account" component={AccountScreen} options={{title: "My Account", headerStyle: { backgroundColor: Colors.background, shadowOpacity: 0 }}} />
         <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{title: "Edit Profile"}} />
         <Stack.Screen name="NotificationSettings" component={NotificationSettingsScreen} options={{title: "Notification Settings"}} />
