@@ -12,23 +12,54 @@ import navigationTheme from './navigation/navigationTheme';
 import { FIREBASE_AUTH } from './FirebaseConfig';
 import * as WebBrowser from 'expo-web-browser';
 import { onAuthStateChanged } from 'firebase/auth';
+import AuthContext from './auth/context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ActivityIndicator } from 'react-native-paper';
 
 WebBrowser.maybeCompleteAuthSession();
 
 export default function App() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const checkLocalUser = async () => {
+    try {
+      setLoading(true);
+      const userJSON = await AsyncStorage.getItem("@user");
+      const userData = userJSON ? JSON.parse(userJSON) : null;
+      setUser(userData);
+    } catch(error) {
+      alert(error.message)
+    } finally {
+      setLoading(false);
+    }
+  }
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(FIREBASE_AUTH, (user) => {
-      setUser(user);
+    checkLocalUser();
+    const unsub = onAuthStateChanged(FIREBASE_AUTH, async (user) => {
+      if (user) {
+        setUser(user);
+        await AsyncStorage.setItem("@user", JSON.stringify(user));
+      } else {
+        setUser(null);
+      }
     });
     return () => unsub();
   }, [])
 
+  if (loading) 
+    return (
+      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <ActivityIndicator size={"large"} />
+      </View>
+    );
   return (
-    <NavigationContainer theme={navigationTheme}>
-      {user ? <AppNavigator /> : <AuthNavigator />}
-    </NavigationContainer>
+    <AuthContext.Provider value={{user, setUser}}>
+      <NavigationContainer theme={navigationTheme}>
+        {user ? <AppNavigator /> : <AuthNavigator />}
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
 

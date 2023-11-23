@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, Image, Button, SafeAreaView, KeyboardAvoidingView } from 'react-native';
 import logo from '../assets/favicon.png';
+import PlanPal from '../assets/PlanPal.png';
 import google from '../assets/google.png';
 import Colors from '../Colors.js';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
@@ -8,6 +9,7 @@ import * as Google from "expo-auth-session/providers/google";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithCredential, getAuth, signInWithRedirect } from 'firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { makeRedirectUri } from 'expo-auth-session';
+import { IOS_CLIENT_ID } from '@env';
 
 
 const LoginScreen = ({ navigation }) => {
@@ -26,7 +28,7 @@ const LoginScreen = ({ navigation }) => {
   }
 
   const [request, response, promptAsync] = Google.useAuthRequest({
-    iosClientId: '493837676775-q38mm877i6rn5kcbh9i8nqul1ommll0j.apps.googleusercontent.com'
+    iosClientId: IOS_CLIENT_ID
   })
 
   useEffect(() => {
@@ -37,13 +39,10 @@ const LoginScreen = ({ navigation }) => {
     }
   }, [response])
 
-  
-  
-
   return (
     <KeyboardAvoidingView behavior='padding' style={styles.container}>
       <Image
-        source={logo} 
+        source={PlanPal} 
         style={styles.logo}
       />
       <TextInput
@@ -94,12 +93,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'start',
+    paddingTop: '40%',
     padding: 20,
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 300,
+    height: 62,
     marginBottom: 100,
   },
   input: {

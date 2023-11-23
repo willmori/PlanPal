@@ -1,27 +1,40 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, Image, Button, SafeAreaView, StatusBar, KeyboardAvoidingView } from 'react-native';
 import logo from '../assets/favicon.png';
 import google from '../assets/google.png';
 import backArrow from '../assets/left-arrow.png';
+import PlanPal from '../assets/PlanPal.png';
 import Colors from '../Colors.js';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
 
 const RegisterScreen = () => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const auth = FIREBASE_AUTH;
+
+  function isValidEmail(email) {
+    const regexPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regexPattern.test(email);
+  }
   
   const register = async () => {
-    if (password.length < 6) {
+    if (name.length < 1) {
+      alert('Name is required')
+    } else if (!isValidEmail(email)) {
+      alert('Email is not valid')
+    } else if (password.length < 6) {
       alert('Password must be 6 characters or greater')
     } else if (password !== confirmPassword) {
       alert('Passwords do not match')
     } else {
       try {
         const response = await createUserWithEmailAndPassword(auth, email, password);
+        const user = response.user;
+        await updateProfile(user, { displayName: name });
         alert('Account created')
       } catch (error) {
         alert(error)
@@ -34,10 +47,17 @@ const RegisterScreen = () => {
     <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={150} style={styles.container}>
       
         <Image
-            source={logo} 
+            source={PlanPal} 
             style={styles.logo}
         />
-        
+          <TextInput
+              value={name}
+              placeholder="Name"
+              placeholderTextColor={Colors.contrast}
+              style={styles.input}
+              autoCapitalize="none"
+              onChangeText={(text) => setName(text)}
+          />
           <TextInput
               value={email}
               placeholder="Email"
@@ -79,13 +99,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'start',
+    paddingTop: '10%',
     padding: 20,
   },
   logo: {
-    width: 100,
-    height: 100,
-    marginBottom: 100,
+    width: 300,
+    height: 62,
+    marginBottom: 60,
   },
   input: {
     width: '100%',

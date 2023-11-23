@@ -5,3 +5,5 @@ export default {
     secondary: 'rgb(65,65,65)',
     contrast: 'rgb(246,198,152)'
 }
+
+//Logo color #C56E33
