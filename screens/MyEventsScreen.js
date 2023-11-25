@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, FlatList } from 'react-native';
 import Colors from '../Colors';
 import EventCard from '../components/EventCard';
 import { Searchbar } from 'react-native-paper';
 import { Image } from 'react-native';
-
+import AuthContext from '../auth/context';
 
 export default function MyEventsScreen({ navigation }) {
   const [eventsData, setEventsData] = React.useState([]);
+  const { user, setUser } = useContext(AuthContext);
+  console.log(user)
 
   React.useEffect(() => {
-    fetch("http://localhost:5000/api/events")
+    fetch(`http://localhost:5000/api/myEvents/${user.email}`)
       .then(response => response.json())
       .then(data => setEventsData(data))
       .catch(error => console.log(error))

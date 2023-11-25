@@ -12,6 +12,7 @@ export default function EventDetailScreen({ route }) {
         <Text>{event.date}</Text>
         <Text>{event.time}</Text>
         <Text>{event.address}</Text>
+        <Text>{JSON.stringify(event.members)}</Text>
     </View>
   );
 }
