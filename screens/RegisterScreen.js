@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, Image, Button, SafeAreaView, StatusBar, KeyboardAvoidingView } from 'react-native';
 import logo from '../assets/favicon.png';
@@ -7,34 +7,59 @@ import backArrow from '../assets/left-arrow.png';
 import PlanPal from '../assets/PlanPal.png';
 import Colors from '../Colors.js';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
+import { isValidEmail, isValidName, isValidPassword } from '../validators/validators';
 
 const RegisterScreen = () => {
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const auth = FIREBASE_AUTH;
+  const [usernamesTaken, setUsernamesTaken] = useState([]);
+  const [emailsTaken, setEmailsTaken] = useState([]);
 
-  function isValidEmail(email) {
-    const regexPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regexPattern.test(email);
-  }
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/usernames`)
+      .then(response => response.json())
+      .then(data => setUsernamesTaken(data))
+      .catch(error => console.log(error))
+  }, [])
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/emails`)
+      .then(response => response.json())
+      .then(data => setEmailsTaken(data))
+      .catch(error => console.log(error))
+  }, [])
   
   const register = async () => {
-    if (name.length < 1) {
-      alert('Name is required')
-    } else if (!isValidEmail(email)) {
-      alert('Email is not valid')
-    } else if (password.length < 6) {
-      alert('Password must be 6 characters or greater')
-    } else if (password !== confirmPassword) {
-      alert('Passwords do not match')
+    const nameValidator = isValidName(username, usernamesTaken);
+    const emailValidator = isValidEmail(email, emailsTaken);
+    const passwordValidator = isValidPassword(password, confirmPassword);
+    if (!nameValidator.valid) {
+      alert(nameValidator.reason);
+    } else if (!emailValidator.valid) {
+      alert(emailValidator.reason)
+    } else if (!passwordValidator.valid) {
+      alert(passwordValidator.reason)
     } else {
       try {
-        const response = await createUserWithEmailAndPassword(auth, email, password);
+        const response = await createUserWithEmailAndPassword(FIREBASE_AUTH, email, password);
         const user = response.user;
-        await updateProfile(user, { displayName: name });
+        await updateProfile(user, { displayName: username });
+
+        const firestoreUserData = {
+          email: email,
+          username: username
+        }
+        const res = await fetch(`http://localhost:5000/api/addUser`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(firestoreUserData),
+        })
+        
         alert('Account created')
       } catch (error) {
         alert(error)
@@ -51,12 +76,12 @@ const RegisterScreen = () => {
             style={styles.logo}
         />
           <TextInput
-              value={name}
-              placeholder="Name"
+              value={username}
+              placeholder="Username"
               placeholderTextColor={Colors.contrast}
               style={styles.input}
               autoCapitalize="none"
-              onChangeText={(text) => setName(text)}
+              onChangeText={(text) => setUsername(text)}
           />
           <TextInput
               value={email}

@@ -31,7 +31,10 @@ export default function MyEventsScreen({ navigation }) {
           onChangeText={onChangeSearch}
           value={searchQuery}
           mode="bar"
-          style={{width: '90%', backgroundColor: Colors.contrast, borderRadius: 10}}
+          style={{width: '90%', backgroundColor: Colors.contrast, borderRadius: 10, shadowColor: "#000",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.6,
+          shadowRadius: 6 }}
         />
       </View>
       <View style={styles.eventsContainer}>
