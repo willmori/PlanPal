@@ -3,10 +3,10 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import MyEventsScreen from "../screens/MyEventsScreen";
-import NewEventScreen from '../screens/NewEventScreen';
 import AccountScreen from "../screens/AccountScreen";
 
 import EventsNavigator from "./EventsNavigator";
+import NewEventNavigator from "./NewEventNavigator";
 import AccountNavigator from "./AccountNavigator";
 import NewEventButton from "./NewEventButton";
 import Colors from "../Colors";
@@ -34,7 +34,7 @@ const AppNavigator = () => (
             options={{title: "My Events", tabBarIcon: ({ color, size }) => <FontAwesome5 name="calendar-alt" color={color} size={size} /> }} />
         <Tab.Screen
             name="NewEvent"
-            component={NewEventScreen} 
+            component={NewEventNavigator} 
             options={({ navigation }) => ({
                 tabBarButton: () => (<NewEventButton onPress={() => navigation.navigate("NewEvent")} />)
             })} />

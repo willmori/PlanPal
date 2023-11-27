@@ -4,7 +4,7 @@ import Colors from '../Colors';
 import EventCard from '../components/EventCard';
 import { Searchbar } from 'react-native-paper';
 import { Image } from 'react-native';
-import AuthContext from '../auth/context';
+import { AuthContext } from '../contexts/contexts';
 
 export default function MyEventsScreen({ navigation }) {
   const [eventsData, setEventsData] = React.useState([]);

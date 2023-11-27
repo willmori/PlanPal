@@ -12,7 +12,7 @@ import navigationTheme from './navigation/navigationTheme';
 import { FIREBASE_AUTH } from './FirebaseConfig';
 import * as WebBrowser from 'expo-web-browser';
 import { onAuthStateChanged } from 'firebase/auth';
-import AuthContext from './auth/context';
+import { AuthContext } from './contexts/contexts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ActivityIndicator } from 'react-native-paper';
 

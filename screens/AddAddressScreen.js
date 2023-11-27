@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Dimensions, TouchableOpacity } from 'react-native';
 import MapView from 'react-native-maps';
 import * as Location from 'expo-location';
 import Colors from '../Colors';
+import { NewEventContext } from '../contexts/contexts';
 
-export default function NewEventScreen() {
-  const [deviceLatitude, setDeviceLatitude] = useState();
-  const [deviceLongitude, setDeviceLongitude] = useState();
+//address, name, date/time, members
+export default function AddAddressScreen({ navigation }) {
+  const { address, setAddress } = useContext(NewEventContext);
+
   const [location, setLocation] = useState(null);
 
   useEffect(() => {
@@ -37,6 +39,9 @@ export default function NewEventScreen() {
             longitudeDelta: 0.0421
           }}
         />}
+        <TouchableOpacity onPress={() => navigation.navigate("Name")}>
+          <Text>NEXT</Text>
+        </TouchableOpacity>
     </View>
   );
 }

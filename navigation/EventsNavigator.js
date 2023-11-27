@@ -24,7 +24,7 @@ const EventsNavigator = () => (
         <Stack.Screen 
             name="EventDetail" 
             component={EventDetailScreen} 
-            options={{title: "Event Details"}} />
+            options={{title: "Event Details", headerBackTitleVisible: false}} />
     </Stack.Navigator>
 )
 

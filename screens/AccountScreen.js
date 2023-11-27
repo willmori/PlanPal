@@ -7,7 +7,7 @@ import Colors from '../Colors.js';
 import Avatar from '../components/Avatar';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FIREBASE_AUTH } from '../FirebaseConfig';
-import AuthContext from '../auth/context';
+import { AuthContext } from '../contexts/contexts';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AccountScreen = ({ navigation }) => {
